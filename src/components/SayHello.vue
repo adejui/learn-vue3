@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <button v-on:click="increment">Increment {{ counter }}</button> <br />
-        <input type="text" id="firstName" placeholder="First Name" /> <br />
-        <input type="text" id="lastName" placeholder="Last Name" /> <br />
+    <form action="">
+        <div>
+            <button v-on:click="counter++">Increment {{ counter }}</button> <br />
+            <input type="text" id="firstName" placeholder="First Name" @input="changeFirstName" /> <br />
+            <input type="text" id="lastName" placeholder="Last Name" @input="changeLastName" /> <br />
 
-        <button v-on:click="sayHello">Say Hello</button>
+            <button v-on:click.prevent="sayHello">Say Hello</button>
 
-        <h1>Hello {{ fullName }}</h1>
-    </div>
+            <h1>Hello {{ fullName }}</h1>
+        </div>
+    </form>
 </template>
 
 <script setup>
@@ -28,12 +30,19 @@ const fullName = computed((oldName) => {
     return `${person.firstName} ${person.lastName}`;
 });
 
+function changeFirstName(event) {
+    person.firstName = event.target.value;
+}
+function changeLastName(event) {
+    person.lastName = event.target.value;
+}
+
 const counter = ref(0);
 
-function increment() {
-    console.log(`increment called`);
-    counter.value++;
-}
+// function increment() {
+//     console.log(`increment called`);
+//     counter.value++;
+// }
 </script>
 
 <style lang="scss" scoped></style>
