@@ -8,14 +8,13 @@
             </li>
         </ul>
     </div>
-    <div>
-        <h1>TodoList</h1>
-        <ul v-for="item in items" :key="item.id">
-            <li v-for="(value, key) in item">
-                {{ key }}: {{ value }}
-            </li>
+
+    <h1>TodoList</h1>
+    <template v-for="item in items">
+        <ul v-if="!item.done" :key="item.id">
+            <li v-for="(value, key) in item">{{ key }}: {{ value }}</li>
         </ul>
-    </div>
+    </template>
 
     <div>
         <div v-for="n in 10">
@@ -29,18 +28,22 @@ const items = [
     {
         id: 1,
         text: "learn Vue 3",
+        done: true,
     },
     {
         id: 2,
         text: "Learn Laravel",
+        done: false,
     },
     {
         id: 3,
         text: "Learn Fluter",
+        done: false,
     },
     {
         id: 4,
         text: "Learn Tailwind",
+        done: false,
     },
 ];
 </script>
