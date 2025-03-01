@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>Buat Note</h1>
-        <input ref="noteInput" type="text" name="note" v-model="note" placeholder="Tulis Note Disini" autofocus/>
+        <input ref="noteInput" type="text" name="note" v-model="note" placeholder="Tulis Note Disini" autofocus />
         <button @click="addNote">Tambah note</button>
     </div>
 
@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { reactive, useTemplateRef, ref } from "vue";
+import { reactive, useTemplateRef, ref, onBeforeMount, onMounted, onBeforeUnmount, onUpdated } from "vue";
 
 const notes = reactive([]);
 const note = ref("");
@@ -23,12 +23,22 @@ function addNote() {
     notes.push(note.value);
     note.value = "";
     noteInput.value.focus();
-    if(noteList.value) {
+    if (noteList.value) {
         noteList.value.forEach((li) => {
             console.log(li.textContent);
-        })
+        });
     }
 }
+
+onBeforeMount(() => {
+    console.info("onBeforeMount");
+});
+onMounted(() => {
+    console.info("onMounted");
+});
+onUpdated(() => {
+    console.info("onUpdated");
+});
 </script>
 
 <style lang="scss" scoped></style>
