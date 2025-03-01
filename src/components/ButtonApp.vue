@@ -1,8 +1,21 @@
 <template>
-    <MyButton class="button" @click="clickHandler" name="Ade" contoh="Jui" />
+    <Container title="COntoh Button">
+        <template #header="attributes">
+            <h1>Header {{ attributes.counter }}</h1>
+        </template>
+
+        <template v-slot:default="attributes">
+            <MyButton class="button" @click="clickHandler" :name="attributes.counter" />
+        </template>
+
+        <template #footer>
+            <h4>Footer</h4>
+        </template>
+    </Container>
 </template>
 
 <script setup>
+import Container from "./Container.vue";
 import MyButton from "./MyButton.vue";
 
 function clickHandler() {
